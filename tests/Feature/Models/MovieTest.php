@@ -41,7 +41,7 @@ it('maps data from tmdb', function (): void {
     Assert::assertSame('Aufgrund von Bodenschätzen außerirdischen Ursprungs ist das afrikanische Königreich Wakanda unermesslich reich. Nur hier kommt das Vibrationen jeder Art und Stärke absorbierende Mineral Vibranium vor. Den Bewohnern von Wakanda ist sehr daran gelegen, vor den Augen Fremder verborgen zu bleiben.  Reichtum weckt Begehrlichkeiten, und es braucht einen starken Führer, ihn zu verteidigen: Den Black Panther! Die Verantwortung des Black Panther wird vom König Wakandas an den jeweiligen Nachfolger weitergegeben. Und so nimmt T’Challa die Bürde und die Würde des ihm vorbestimmten Schicksals von seinem Vater T’Chaka nach dessen tragischen Tod entgegen.', $movie->overview);
 
     Assert::assertCount(3, $movie->genres);
-    Assert::assertContainsOnly(MovieGenre::class, $movie->genres);
+    Assert::assertContainsOnlyInstancesOf(MovieGenre::class, $movie->genres);
     ArrayAssertions::assertEquals([12, 28, 878], $movie->genres->pluck('id')->all());
 
     Assert::assertSame(529892, $movie->collection_id);
@@ -70,7 +70,7 @@ it('movie provides runtime', function (): void {
 
     expect($movie->runtime())
         ->toBeInstanceOf(CarbonInterval::class)
-        ->totalMinutes->toBe(112);
+        ->totalMinutes->toBe(112.0);
 });
 
 it('movie has no runtime', function (): void {

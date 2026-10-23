@@ -20,11 +20,6 @@ use Pest\Expectation;
 uses(\Tests\Feature\TestCase::class)->in('Feature');
 uses(\Tests\TestCase::class)->in('Live');
 
-class Pest
-{
-    use UrlAssertions;
-}
-
 /*
 |--------------------------------------------------------------------------
 | Expectations
@@ -32,16 +27,13 @@ class Pest
 */
 
 expect()->extend('assert', function (Closure $assertions): Expectation {
-    $helper = new Pest();
-    $assertions = $assertions->bindTo($helper, $helper);
     $assertions($this->value);
 
     return $this;
 });
 
 expect()->extend('toBeUrl', function (string $expected): Expectation {
-    $helper = new Pest();
-    $helper->assertValidLoose($this->value);
+    UrlAssertions::assertValidLoose($this->value);
 
     return $this->toBe($expected);
 });

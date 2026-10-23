@@ -13,7 +13,7 @@ it('maps data from tmdb', function (): void {
 });
 
 it('translates to undefined language on the fly', function (): void {
-    $genre = TvGenre::query()->find(16);
+    $genre = TvGenre::query()->find(35);
 
     expect($genre)
         ->toBeInstanceOf(TvGenre::class)
@@ -33,7 +33,7 @@ it('does not translate empty language', function (): void {
         ->exists->toBeTrue()
         ->wasRecentlyCreated->toBeTrue()
         ->id->toBe(35)
-        ->translate('name', 'it')->toBe('Commedia')
+        ->translate('name', 'de')->toBe('Komödie')
         ->translate('name', 'en')->toBeNull();
 });
 
